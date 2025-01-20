@@ -47,17 +47,19 @@ jobs:
           -scheme ReactNative_Demo \
           -sdk iphoneos \
           -configuration Release \
-          ENABLE_TESTABILITY=YES \
           -archivePath ios/build/ReactNative_Demo.xcarchive \
+          CODE_SIGN_STYLE=Manual \
           CODE_SIGN_IDENTITY="" \
           CODE_SIGNING_REQUIRED=NO \
           CODE_SIGNING_ALLOWED=NO \
+          DEVELOPMENT_TEAM="" \
           archive
 
         xcodebuild -exportArchive \
           -archivePath ios/build/ReactNative_Demo.xcarchive \
           -exportPath ios/build \
           -exportOptionsPlist ios/ExportOptions.plist \
+          CODE_SIGN_STYLE=Manual \
           CODE_SIGN_IDENTITY="" \
           CODE_SIGNING_REQUIRED=NO \
           CODE_SIGNING_ALLOWED=NO
