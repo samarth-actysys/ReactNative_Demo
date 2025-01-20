@@ -4,11 +4,10 @@ on:
   push:
     branches:
       - main
-  pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
-    name: Build iOS Unsigned IPA
     runs-on: macos-latest
 
     steps:
@@ -23,7 +22,9 @@ jobs:
     - name: Install dependencies
       run: |
         npm install
-        npx pod-install
+        cd ios
+        pod install
+        cd ..
 
     - name: Build .ipa using xcodebuild
       run: |
@@ -33,13 +34,19 @@ jobs:
           -sdk iphoneos \
           -configuration Release \
           -archivePath ios/build/ReactNative_Demo.xcarchive \
-          archive
+          archive \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO
 
         xcodebuild \
           -exportArchive \
           -archivePath ios/build/ReactNative_Demo.xcarchive \
           -exportPath ios/build \
-          -exportOptionsPlist ios/ExportOptions.plist
+          -exportOptionsPlist ios/ExportOptions.plist \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO
 
     - name: Upload .ipa to Artifacts
       uses: actions/upload-artifact@v3
