@@ -19,6 +19,12 @@ jobs:
       with:
         node-version: '16'
 
+    - name: Set Xcode Version
+      run: sudo xcode-select --switch /Applications/Xcode_15.4.app/Contents/Developer
+
+    - name: Verify Xcode Version
+      run: xcodebuild -version
+
     - name: Install dependencies
       run: |
         npm install
