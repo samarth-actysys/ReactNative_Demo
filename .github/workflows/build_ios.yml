@@ -31,11 +31,17 @@ jobs:
         cd ios
         pod install
         cd ..
+
     - name: Clean Derived Data
       run: rm -rf ~/Library/Developer/Xcode/DerivedData
 
     - name: Build .ipa using xcodebuild
       run: |
+        xcodebuild clean \
+          -workspace ios/ReactNative_Demo.xcworkspace \
+          -scheme ReactNative_Demo \
+          -configuration Release
+        
         xcodebuild \
           -workspace ios/ReactNative_Demo.xcworkspace \
           -scheme ReactNative_Demo \
@@ -52,8 +58,10 @@ jobs:
         xcodebuild -exportArchive \
           -archivePath ios/build/ReactNative_Demo.xcarchive \
           -exportPath ios/build \
-          -exportOptionsPlist ios/ExportOptions.plist
-
+          -exportOptionsPlist ios/ExportOptions.plist \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO
 
     - name: Upload .ipa to Artifacts
       uses: actions/upload-artifact@v3
