@@ -20,7 +20,7 @@ jobs:
         node-version: '16'
 
     - name: Set Xcode Version
-      run: sudo xcode-select --switch /Applications/Xcode_15.4.app/Contents/Developer
+      run: sudo xcode-select --switch /Applications/Xcode_15.3.app/Contents/Developer
 
     - name: Verify Xcode Version
       run: xcodebuild -version
