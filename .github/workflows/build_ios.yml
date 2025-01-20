@@ -35,6 +35,7 @@ jobs:
           -scheme ReactNative_Demo \
           -sdk iphoneos \
           -configuration Release \
+          ENABLE_TESTABILITY=YES \
           -archivePath ios/build/ReactNative_Demo.xcarchive \
           DEVELOPMENT_TEAM=1234567890 \
           CODE_SIGN_IDENTITY="" \
