@@ -1,0 +1,48 @@
+name: Build iOS Unsigned IPA
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    name: Build iOS Unsigned IPA
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: |
+        npm install
+        npx pod-install
+
+    - name: Build .ipa using xcodebuild
+      run: |
+        xcodebuild \
+          -workspace ios/ReactNative_Demo.xcworkspace \
+          -scheme ReactNative_Demo \
+          -sdk iphoneos \
+          -configuration Release \
+          -archivePath ios/build/ReactNative_Demo.xcarchive \
+          archive
+
+        xcodebuild \
+          -exportArchive \
+          -archivePath ios/build/ReactNative_Demo.xcarchive \
+          -exportPath ios/build \
+          -exportOptionsPlist ios/ExportOptions.plist
+
+    - name: Upload .ipa to Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: ios-build
+        path: ios/build/*.ipa
