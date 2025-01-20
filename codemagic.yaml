@@ -1,0 +1,39 @@
+workflows:
+  ios_build_unsigned:
+    name: iOS Build (Unsigned)
+    environment:
+      xcode: latest
+      cocoapods: default
+      node: 16
+    scripts:
+      - name: Install dependencies
+        script: |
+          npm install
+          cd ios
+          pod install
+          cd ..
+      - name: Clean Derived Data
+        script: rm -rf ~/Library/Developer/Xcode/DerivedData
+      - name: Build unsigned IPA
+        script: |
+          xcodebuild \
+            -workspace ios/ReactNative_Demo.xcworkspace \
+            -scheme ReactNative_Demo \
+            -sdk iphoneos \
+            -configuration Release \
+            -archivePath ios/build/ReactNative_Demo.xcarchive \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            archive
+          xcodebuild -exportArchive \
+            -archivePath ios/build/ReactNative_Demo.xcarchive \
+            -exportPath ios/build \
+            -exportOptionsPlist ios/ExportOptions.plist \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+    artifacts:
+      - ios/build/*.ipa
