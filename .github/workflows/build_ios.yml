@@ -41,12 +41,13 @@ jobs:
           -workspace ios/ReactNative_Demo.xcworkspace \
           -scheme ReactNative_Demo \
           -configuration Release
-        
+
         xcodebuild \
           -workspace ios/ReactNative_Demo.xcworkspace \
           -scheme ReactNative_Demo \
           -sdk iphoneos \
           -configuration Release \
+          ENABLE_TESTABILITY=YES \
           -archivePath ios/build/ReactNative_Demo.xcarchive \
           CODE_SIGN_STYLE=Manual \
           CODE_SIGN_IDENTITY="" \
