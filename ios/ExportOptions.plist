@@ -6,6 +6,8 @@
   <string>release-testing</string>
   <key>signingStyle</key>
   <string>manual</string>
+  <key>CODE_SIGNING_REQUIRED</key>
+  <string>NO</string>
   <key>teamID</key>
   <string>1234567890</string>
   <key>compileBitcode</key>
