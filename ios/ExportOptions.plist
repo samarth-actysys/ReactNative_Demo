@@ -6,6 +6,8 @@
   <string>ad-hoc</string>
   <key>signingStyle</key>
   <string>manual</string>
+  <key>teamID</key>
+  <string>1234567890</string>
   <key>compileBitcode</key>
   <false/>
   <key>thinning</key>
