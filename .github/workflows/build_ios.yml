@@ -49,7 +49,6 @@ jobs:
           -configuration Release \
           ENABLE_TESTABILITY=YES \
           -archivePath ios/build/ReactNative_Demo.xcarchive \
-          DEVELOPMENT_TEAM=1234567890 \
           CODE_SIGN_IDENTITY="" \
           CODE_SIGNING_REQUIRED=NO \
           CODE_SIGNING_ALLOWED=NO \
