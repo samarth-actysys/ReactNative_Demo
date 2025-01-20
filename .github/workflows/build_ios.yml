@@ -50,7 +50,7 @@ jobs:
           ENABLE_TESTABILITY=YES \
           -archivePath ios/build/ReactNative_Demo.xcarchive \
           CODE_SIGN_STYLE=Manual \
-          CODE_SIGN_IDENTITY="" \
+          CODE_SIGN_IDENTITY="Self-Signed Certificate" \
           CODE_SIGNING_REQUIRED=NO \
           CODE_SIGNING_ALLOWED=NO \
           DEVELOPMENT_TEAM="" \
@@ -61,7 +61,7 @@ jobs:
           -exportPath ios/build \
           -exportOptionsPlist ios/ExportOptions.plist \
           CODE_SIGN_STYLE=Manual \
-          CODE_SIGN_IDENTITY="" \
+          CODE_SIGN_IDENTITY="Self-Signed Certificate" \
           CODE_SIGNING_REQUIRED=NO \
           CODE_SIGNING_ALLOWED=NO
 
